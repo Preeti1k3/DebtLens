@@ -1,69 +1,75 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { getDashboard } from '@/lib/queries';
+import { TopDebtChart, RiskCountChart, TrendChart } from '@/components/charts';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+const BADGE: Record<string, string> = {
+  Low: 'bg-green-100 text-green-800', Moderate: 'bg-yellow-100 text-yellow-800',
+  High: 'bg-orange-100 text-orange-800', 'Very High': 'bg-red-100 text-red-800',
+};
+
+export default async function Home() {
+  const d = await getDashboard();
+  const veryHigh = d.categories.find(c => c.category === 'Very High')?.count ?? 0;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="mx-auto max-w-6xl p-6 space-y-8">
+      <header>
+        <h1 className="text-3xl font-bold">DebtLens</h1>
+        <p className="text-gray-500">Global external debt risk dashboard · data year {d.year}</p>
+      </header>
+
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          ['Countries assessed', d.countriesAssessed],
+          ['Average risk score', d.avgScore],
+          ['Very High risk', veryHigh],
+          ['Data year', d.year],
+        ].map(([label, value]) => (
+          <div key={String(label)} className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+            <div className="text-sm text-gray-500">{label}</div>
+            <div className="text-2xl font-semibold">{value}</div>
+          </div>
+        ))}
+      </section>
+
+      <section className="grid md:grid-cols-2 gap-6">
+        <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+          <h2 className="font-semibold mb-2">Top 10 by external debt (US$ millions)</h2>
+          <TopDebtChart data={d.topDebt} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+          <h2 className="font-semibold mb-2">Countries by risk category</h2>
+          <RiskCountChart data={d.categories} />
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+        <h2 className="font-semibold mb-2">Average external debt, % of GNI, over time</h2>
+        <TrendChart data={d.trend} />
+      </section>
+
+      <section className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+        <h2 className="font-semibold mb-3">Highest-risk countries</h2>
+        <table className="w-full text-sm">
+          <thead className="text-left text-gray-500">
+            <tr><th>Country</th><th>Region</th><th>Score</th><th>Category</th></tr>
+          </thead>
+          <tbody>
+            {d.topRisk.map(r => (
+              <tr key={r.code} className="border-t border-slate-100">
+                <td className="py-2">
+                  <Link className="text-blue-600 hover:underline" href={`/country/${r.code}`}>{r.country}</Link>
+                </td>
+                <td>{r.region}</td>
+                <td>{r.score}</td>
+                <td><span className={`px-2 py-0.5 rounded-full ${BADGE[r.category]}`}>{r.category}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </main>
   );
 }
