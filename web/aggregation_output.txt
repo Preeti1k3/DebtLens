@@ -1,0 +1,137 @@
+
+=== A. Average external debt (% of GNI) by year, countries only ===
+[
+  {
+    "countries": 120,
+    "year": "2015",
+    "avgDebtToGni": 49.61
+  },
+  {
+    "countries": 120,
+    "year": "2016",
+    "avgDebtToGni": 53.59
+  },
+  {
+    "countries": 120,
+    "year": "2017",
+    "avgDebtToGni": 54.38
+  },
+  {
+    "countries": 120,
+    "year": "2018",
+    "avgDebtToGni": 53.14
+  },
+  {
+    "countries": 119,
+    "year": "2019",
+    "avgDebtToGni": 55
+  },
+  {
+    "countries": 119,
+    "year": "2020",
+    "avgDebtToGni": 65.03
+  },
+  {
+    "countries": 119,
+    "year": "2021",
+    "avgDebtToGni": 62.47
+  },
+  {
+    "countries": 119,
+    "year": "2022",
+    "avgDebtToGni": 58.05
+  },
+  {
+    "countries": 116,
+    "year": "2023",
+    "avgDebtToGni": 57.04
+  }
+]
+
+=== B. Top 10 countries by latest total external debt (US$) ===
+[
+  {
+    "country": "China",
+    "year": "2023",
+    "debtUsd": 2447537483872.8
+  },
+  {
+    "country": "India",
+    "year": "2023",
+    "debtUsd": 647556415555.5
+  },
+  {
+    "country": "Brazil",
+    "year": "2023",
+    "debtUsd": 607387151485.1
+  },
+  {
+    "country": "Mexico",
+    "year": "2023",
+    "debtUsd": 595981151218
+  },
+  {
+    "country": "Turkiye",
+    "year": "2023",
+    "debtUsd": 499814231476.7
+  },
+  {
+    "country": "Indonesia",
+    "year": "2023",
+    "debtUsd": 399613483613.1
+  },
+  {
+    "country": "Russian Federation",
+    "year": "2022",
+    "debtUsd": 376117000821.9
+  },
+  {
+    "country": "Argentina",
+    "year": "2023",
+    "debtUsd": 252793904703.1
+  },
+  {
+    "country": "Colombia",
+    "year": "2023",
+    "debtUsd": 196165876816.2
+  },
+  {
+    "country": "Thailand",
+    "year": "2023",
+    "debtUsd": 194693030257.4
+  }
+]
+
+=== C. Average external debt (% of GNI) by region, 2020 onwards ===
+[
+  {
+    "observations": 78,
+    "region": "Europe & Central Asia",
+    "avgDebtToGni": 68
+  },
+  {
+    "observations": 48,
+    "region": "Middle East, North Africa, Afghanistan & Pakistan",
+    "avgDebtToGni": 64.07
+  },
+  {
+    "observations": 171,
+    "region": "Sub-Saharan Africa ",
+    "avgDebtToGni": 59.57
+  },
+  {
+    "observations": 88,
+    "region": "Latin America & Caribbean ",
+    "avgDebtToGni": 59.31
+  },
+  {
+    "observations": 24,
+    "region": "South Asia",
+    "avgDebtToGni": 57.37
+  },
+  {
+    "observations": 64,
+    "region": "East Asia & Pacific",
+    "avgDebtToGni": 55.23
+  }
+]
