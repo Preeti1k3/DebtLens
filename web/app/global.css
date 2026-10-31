@@ -1,0 +1,39 @@
+
+/* scrolling ticker */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 60s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+
+/* line that draws itself on page load */
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 3.5s ease-out forwards;
+}
+
+/* country dots: instant name label + highlight ring on hover */
+.dot { position: relative; }
+.dot:hover { box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35) !important; }
+.dot:hover::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  font: 600 12px system-ui, sans-serif;
+  z-index: 30;
+  pointer-events: none;
+}

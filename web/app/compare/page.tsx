@@ -20,7 +20,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
 
   return (
     <main className="mx-auto max-w-6xl p-6 space-y-6">
-      <a href="/" className="text-sm text-blue-600 hover:underline">← Dashboard</a>
+      <a href="/dashboard" className="text-sm text-blue-600 hover:underline">← Dashboard</a>
       <h1 className="text-3xl font-bold">Compare countries</h1>
 
       <form method="GET" className={`${card} flex flex-wrap items-end gap-3`}>

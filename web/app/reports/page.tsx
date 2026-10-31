@@ -11,7 +11,7 @@ export default async function ReportsPage() {
 
   return (
     <main className="mx-auto max-w-6xl p-6 space-y-6">
-      <Link href="/" className="text-sm text-blue-600 hover:underline">← Dashboard</Link>
+      <Link href="/dashboard" className="text-sm text-blue-600 hover:underline">← Dashboard</Link>
       <h1 className="text-3xl font-bold">Debt trends and reports</h1>
       <p className="text-slate-500">Analytical reports from PostgreSQL · data year {d.year}</p>
 

@@ -18,7 +18,7 @@ export default async function RiskPage({ searchParams }: {
 
   return (
     <main className="mx-auto max-w-6xl p-6 space-y-6">
-      <Link href="/" className="text-sm text-blue-600 hover:underline">← Dashboard</Link>
+      <Link href="/dashboard" className="text-sm text-blue-600 hover:underline">← Dashboard</Link>
       <h1 className="text-3xl font-bold">Risk analysis</h1>
 
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">

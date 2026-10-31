@@ -19,7 +19,7 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
 
   return (
     <main className="mx-auto max-w-6xl p-6 space-y-6">
-      <Link href="/" className="text-sm text-blue-600 hover:underline">← Dashboard</Link>
+      <Link href="/dashboard" className="text-sm text-blue-600 hover:underline">← Dashboard</Link>
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">{country.name}</h1>
